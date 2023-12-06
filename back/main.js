@@ -6,6 +6,8 @@ const morgan= require('morgan')
 const bodyParser = require('body-parser')
 
 const AuthRoute = require('./routes/Auth')
+const routes = require('./routes/poll')
+
 
 mongoose.set("strictQuery", false);
 
@@ -15,6 +17,9 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'))
 app.use('/api', AuthRoute)
+app.use('/polls', routes);
+
+
 
 mongoose
   .connect("mongodb://localhost:27017/database", {
@@ -31,6 +36,6 @@ mongoose
 
 
 app.listen(3000, () => {
-  console.log("App listen on port", 5000);
+  console.log("App listen on port", 3000);
 });
 

@@ -34,7 +34,7 @@ const login = (req, res, next) =>{
     var username = req.body.username
     var password = req.body.password
 
-    User.findOne({$or: [{email:username}, {email:username}]})
+    User.findOne({$or: [{email:username}]})
     .then(user =>{
         if(user){
            bcrypt.compare(password, user.password, function(err, result){
@@ -44,7 +44,7 @@ const login = (req, res, next) =>{
                 })
             }
             if(result){
-                let token = jwt.sign({name:user.name}, 'verySecretValue', {expiresIn: '1h'})
+                let token = jwt.sign({email:user.email}, 'verySecretValue', {expiresIn: '1h'})
                 res.json({
                     message: 'Login Successful',
                     token

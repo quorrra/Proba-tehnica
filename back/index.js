@@ -8,6 +8,10 @@ const session = require('express-session');
 const flash = require('express-flash');
 const express = require('express');
 
+module.exports={
+  ...require('./pollController')
+}
+
 
 app.use(express.json());
 app.use(morgan('dev'))
